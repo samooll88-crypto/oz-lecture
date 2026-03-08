@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 첫 웹페이지</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>나의 첫 웹페이지</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="profile-card">
+  <div class="profile-left">
+    <div class="avatar">🙂</div>
+  </div>
+
+  <div class="profile-right">
+    <h2 class="profile-name">윤상태</h2>
+    <p class="profile-role">HTML/CSS 배우는 중 · 작은 프로젝트로 수익화 목표</p>
+    <p class="profile-desc">
+      지금은 기초부터 차근차근 만들면서 배우고 있어요.
+      작은 결과물을 계속 쌓아서 나만의 서비스까지 만들어보는 게 목표입니다.
+    </p>
+
+    <div class="profile-links">
+      <a href="#contact" class="btn">연락하기</a>
+      <a href="#skills" class="btn btn-outline">기술 보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- Projects 섹션 시작 -->
+<section id="projects" class="section">
+  <h2>Projects</h2>
+
+  <a href="project1.html" class="project-link-card">
+  <article class="project-card">
+    <h3>운세 한줄 생성기</h3>
+    <p>버튼을 누르면 오늘의 운세 문장이 랜덤으로 나오는 미니 프로젝트.</p>
+  </article>
+</a>
+    <article class="project-card">
+      <h3>회원가입 폼</h3>
+      <p>input/select/button을 사용해 만든 기본 회원가입 폼 페이지.</p>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+      <a class="project-link" href="#" target="_blank">보기</a>
+    </article>
+
+    <article class="project-card">
+      <h3>포트폴리오 1페이지</h3>
+      <p>프로필 카드 + 섹션 구성으로 만든 첫 번째 포트폴리오 페이지.</p>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+      <a class="project-link" href="#" target="_blank">보기</a>
+    </article>
+  </div>
+</section>
+<!-- Projects 섹션 끝 -->
+<!-- 여기부터 새로 추가 -->
+<section id="skills" class="section">
+  <h2>Skills</h2>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <h3>HTML</h3>
+      <p>웹페이지의 구조를 만드는 언어</p>
+    </div>
+
+    <div class="skill-card">
+      <h3>CSS</h3>
+      <p>웹페이지를 꾸미는 스타일 언어</p>
+    </div>
+
+    <div class="skill-card">
+      <h3>JavaScript</h3>
+      <p>웹페이지에 동작을 추가하는 언어</p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 My First Website</p>
+</footer>
+
+</body>
+</html>

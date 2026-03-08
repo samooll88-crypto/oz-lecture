@@ -1,0 +1,151 @@
+/* ===== 기본(모바일 퍼스트) ===== */
+
+/* 박스 모델 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  padding: 1rem;
+}
+
+/* 박스 스타일 */
+header {
+  padding: 1rem;
+  border-bottom: 0.1rem solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.post {
+  padding: 1rem;
+  border: 0.1rem solid #ccc;
+}
+
+aside {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+footer {
+  padding: 1rem;
+  border-top: 0.1rem solid #ccc;
+  margin-top: 1rem;
+}
+
+/* 타이포 + 여백 규칙 */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+nav ul {
+  padding: 1rem;
+}
+
+/* section 여백: 좌우 1vw, 상하 2vw */
+section {
+  margin: 2vw 1vw;
+}
+
+aside {
+  font-size: 0.9rem;
+  line-height: 1.5em;
+}
+
+footer {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* flexbox */
+nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+/* posts: 모바일은 세로로 */
+#posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 제목(h2)은 grid/flex 흐름에서 풀폭으로 보이게 */
+#posts > h2 {
+  margin-bottom: 0.5rem;
+}
+
+/* ===== 태블릿(768px 이상) ===== */
+@media (min-width: 768px) {
+  body {
+    max-width: 90vw;
+    margin: 0 auto;
+  }
+
+  nav ul {
+    justify-content: space-around; /* 항목 간 간격을 고르게 */
+  }
+
+  #posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* grid에서 h2가 2열 전체 차지 */
+  #posts > h2 {
+    grid-column: 1 / -1;
+  }
+
+  aside {
+    margin-top: 1.5rem;
+  }
+}
+
+/* ===== 데스크톱(1024px 이상) ===== */
+@media (min-width: 1024px) {
+  body {
+    max-width: 80vw;
+    margin: 0 auto;
+  }
+
+  .layout {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  #posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; /* 유지 */
+    flex: 1;
+  }
+
+  #posts > h2 {
+    grid-column: 1 / -1;
+  }
+
+  aside {
+    width: 25vw;
+    margin-left: 2vw;
+    margin-top: 0; /* 옆으로 붙으니 위 여백 제거 */
+  }
+}
+.post { 
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .post {
+    margin-bottom: 0; /* grid에서는 gap이 있으니 제거 */
+  }
+}

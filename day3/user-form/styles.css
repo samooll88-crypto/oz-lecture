@@ -1,0 +1,57 @@
+/* 기본 선택자 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body 스타일 */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* id 선택자 */
+#registration-form {
+    max-width: 500px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+}
+
+/* 클래스 선택자 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* label 스타일 */
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+/* 속성 선택자 - 입력 필드 */
+[type="text"],
+[type="email"],
+[type="password"],
+[type="number"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+/* select 스타일 */
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+/* 버튼 스타일 */
+[type="submit"],
+[type="reset"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+}
