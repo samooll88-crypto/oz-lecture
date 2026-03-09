@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">My Portfolio</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header / Hero -->
+  <header id="home" class="py-5 bg-light text-center">
+    <div class="container">
+      <h1 class="display-5 fw-bold mb-3">Welcome to My Portfolio</h1>
+      <p class="lead mb-4">
+        Bootstrap 5를 사용해 제작한 제 개인 포트폴리오 웹사이트입니다.
+      </p>
+      <a href="#projects" class="btn btn-primary me-2">View Projects</a>
+      <a href="#contact" class="btn btn-outline-dark">Contact Me</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="container py-5">
+    <h2 class="text-center mb-4">About Me</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <article class="p-4 shadow-sm rounded bg-white">
+          <p class="mb-0">
+             안녕하세요, 제 이름은 윤상태입니다.
+             저는 현재 웹 개발을 배우고 있으며 HTML, CSS, 
+             그리고 Bootstrap을 사용해 반응형 웹사이트를 만드는 연습을 하고 있습니다.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="container py-5">
+    <h2 class="text-center mb-4">Projects</h2>
+
+    <div class="row g-4">
+      <!-- Project 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Project 1</h5>
+            <p class="card-text">
+              제 프로필을 소개하며 header, section, article, footer 같은 
+              시맨틱 태그 사용을 연습하기 위해 만든 기본 HTML 페이지입니다.
+            </p>
+            <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Project 2</h5>
+            <p class="card-text">
+              container, row, col 같은 Bootstrap 그리드 클래스를 사용하여 
+              다양한 화면 크기에 맞게 콘텐츠를 배치하는 반응형 레이아웃 프로젝트입니다.
+            <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Project 3</h5>
+            <p class="card-text">
+             카드, 네비게이션 바, 연락 폼을 포함한 포트폴리오 스타일 페이지로, 
+             간단하고 읽기 쉬우며 모바일 친화적으로 설계되었습니다
+            <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aside -->
+  <aside class="container pb-5">
+    <div class="p-4 bg-light rounded shadow-sm text-center">
+      <h3 class="mb-3">Extra Information</h3>
+      <p class="mb-0">
+        이 포트폴리오 페이지는 Navbar, Card, Button, Form 등
+        Bootstrap 컴포넌트와 여백 및 정렬을 위한 유틸리티 클래스를 사용해 제작되었습니다.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container py-5">
+    <h2 class="text-center mb-4">Contact</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <form class="p-4 border rounded shadow-sm bg-white">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+              class="form-control"
+              id="message"
+              rows="4"
+              placeholder="Write your message"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2026 My Portfolio. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS CDN -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  ></script>
+</body>
+</html>

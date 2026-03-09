@@ -1,0 +1,21 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+}
+
+section h2 {
+  font-weight: bold;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 2rem;
+}
