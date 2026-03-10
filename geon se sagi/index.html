@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>전세사기 체크리스트</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .hero-box {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+    }
+
+    .card {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+    }
+
+    .check-item {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .status-box {
+      background-color: #ffffff;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.06);
+    }
+
+    .danger-card {
+      height: 100%;
+    }
+
+    .score-box {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .risk-label {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">전세 안전 체크</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">홈</a></li>
+          <li class="nav-item"><a class="nav-link" href="#checklist">체크리스트</a></li>
+          <li class="nav-item"><a class="nav-link" href="#danger">위험신호</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">상담</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="py-5">
+  <div class="container">
+    <div class="hero-box text-center">
+
+      <h1 class="mb-3">
+        전세 계약 전에 반드시 확인하세요
+      </h1>
+
+      <p class="lead mb-4">
+        전세사기는 계약 전에 몇 가지만 확인해도 대부분 예방할 수 있습니다.
+        아래 체크리스트로 안전도를 확인해보세요.
+      </p>
+
+     <a href="#checklist" class="btn btn-primary">
+      체크리스트 시작하기
+</a>
+
+    </div>
+  </div>
+</header>
+
+  <!-- Checklist -->
+  <section id="checklist" class="container py-5">
+    <h2 class="text-center mb-4">전세 계약 체크리스트</h2>
+
+    <!-- 버튼 영역 -->
+    <div class="text-center mb-4">
+      <button id="check-all-btn" class="btn btn-success me-2">전체 완료</button>
+      <button id="reset-btn" class="btn btn-outline-secondary">초기화</button>
+    </div>
+
+    <!-- 진행 상황 -->
+    <div class="status-box mb-4 text-center">
+      <h5 class="mb-2">현재 진행 상황</h5>
+      <p class="mb-2">
+        완료한 항목:
+        <strong><span id="checked-count">0</span></strong> / <span id="total-count">6</span>
+      </p>
+
+      <div class="progress mb-3" role="progressbar" aria-label="Checklist Progress">
+        <div
+          id="progress-bar"
+          class="progress-bar"
+          style="width: 0%;"
+        >
+          0%
+        </div>
+      </div>
+    </div>
+
+    <!-- 위험도 계산 결과 -->
+    <div class="score-box mb-5">
+      <h5 class="mb-2">현재 안전도 진단</h5>
+      <p class="mb-1">
+        안전도 점수:
+        <strong><span id="safety-score">0</span>점</strong>
+      </p>
+      <div id="risk-label" class="risk-label bg-danger text-white">위험</div>
+      <p id="risk-message" class="mt-3 mb-0 text-muted">
+        아직 확인한 항목이 적습니다. 계약 전 필수 항목을 더 확인하세요.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <!-- 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check1" />
+              <label class="form-check-label check-item" for="check1">
+               <i class="bi bi-file-earmark-text me-2"></i>
+                   등기부등본 확인
+                </label>
+            </div>
+            <p class="card-text mb-0">
+              집주인이 실제 소유자인지, 근저당이 설정되어 있는지 먼저 확인합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check2" />
+              <label class="form-check-label check-item" for="check2">
+  <i class="bi bi-bank me-2"></i>
+  근저당 비율 확인
+</label>
+            </div>
+            <p class="card-text mb-0">
+              대출이 과도하게 많은 집은 위험할 수 있으니 전세금 대비 부채를 확인합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check3" />
+              <label class="form-check-label check-item" for="check3">
+  <i class="bi bi-building me-2"></i>
+  건축물대장 확인
+</label>
+            </div>
+            <p class="card-text mb-0">
+              불법건축물 여부와 실제 주거용 건물인지 확인해야 합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check4" />
+             <label class="form-check-label check-item" for="check4">
+  <i class="bi bi-bar-chart-line me-2"></i>
+  전세가율 확인
+</label>
+            </div>
+            <p class="card-text mb-0">
+              집값 대비 전세금 비율이 너무 높으면 깡통전세 가능성이 커집니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check5" />
+              <label class="form-check-label check-item" for="check4">
+  <i class="bi bi-bar-chart-line me-2"></i>
+  전세가율 확인
+</label>
+            </div>
+            <p class="card-text mb-0">
+              등기부상 소유자와 실제 계약 상대방이 같은 사람인지 확인합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 p-3">
+          <div class="card-body">
+            <div class="form-check mb-3">
+              <input class="form-check-input checklist-item" type="checkbox" id="check6" />
+              <label class="form-check-label check-item" for="check6">
+  <i class="bi bi-pin-map me-2"></i>
+  전입신고와 확정일자 준비
+</label>
+            </div>
+            <p class="card-text mb-0">
+              입주 후 전입신고와 확정일자를 받아야 보증금 보호에 유리합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Danger Signs -->
+  <section id="danger" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">이런 경우 특히 조심하세요</h2>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <div class="card danger-card p-3">
+            <div class="card-body">
+              <h5 class="card-title">시세보다 높은 전세가</h5>
+              <p class="card-text mb-0">
+                집값과 전세금 차이가 거의 없다면 매우 신중하게 봐야 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card danger-card p-3">
+            <div class="card-body">
+              <h5 class="card-title">대출이 많은 집</h5>
+              <p class="card-text mb-0">
+                경매가 진행되면 보증금을 돌려받기 어려워질 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card danger-card p-3">
+            <div class="card-body">
+              <h5 class="card-title">시세가 불분명한 신축 빌라</h5>
+              <p class="card-text mb-0">
+                비교 가능한 시세가 적은 경우 보증금 위험을 판단하기 어렵습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="container py-5">
+    <h2 class="text-center mb-4">문의하기</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <form class="bg-white p-4 rounded shadow-sm">
+          <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요" />
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">문의 내용</label>
+            <textarea class="form-control" id="message" rows="4" placeholder="문의 내용을 입력하세요"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2026 전세 안전 체크</p>
+  </footer>
+
+  <script>
+    const checklistItems = document.querySelectorAll(".checklist-item");
+    const checkedCount = document.getElementById("checked-count");
+    const totalCount = document.getElementById("total-count");
+    const progressBar = document.getElementById("progress-bar");
+
+    const safetyScore = document.getElementById("safety-score");
+    const riskLabel = document.getElementById("risk-label");
+    const riskMessage = document.getElementById("risk-message");
+
+    const checkAllBtn = document.getElementById("check-all-btn");
+    const resetBtn = document.getElementById("reset-btn");
+
+    totalCount.textContent = checklistItems.length;
+
+    function updateChecklistStatus() {
+      let completed = 0;
+
+      checklistItems.forEach((item) => {
+        if (item.checked) {
+          completed++;
+        }
+      });
+
+      const percent = Math.round((completed / checklistItems.length) * 100);
+
+      checkedCount.textContent = completed;
+      progressBar.style.width = percent + "%";
+      progressBar.textContent = percent + "%";
+      safetyScore.textContent = percent;
+
+      riskLabel.className = "risk-label";
+
+      if (percent <= 30) {
+        riskLabel.classList.add("bg-danger", "text-white");
+        riskLabel.textContent = "위험";
+        riskMessage.textContent = "아직 확인한 항목이 적습니다. 계약 전 필수 항목을 더 확인하세요.";
+      } else if (percent <= 60) {
+        riskLabel.classList.add("bg-warning", "text-dark");
+        riskLabel.textContent = "주의";
+        riskMessage.textContent = "일부 항목은 확인했지만 아직 부족합니다. 중요한 서류를 더 점검하세요.";
+      } else if (percent < 100) {
+        riskLabel.classList.add("bg-info", "text-dark");
+        riskLabel.textContent = "보통";
+        riskMessage.textContent = "대부분 확인 중입니다. 마지막 필수 항목까지 체크하면 더 안전합니다.";
+      } else {
+        riskLabel.classList.add("bg-success", "text-white");
+        riskLabel.textContent = "안전";
+        riskMessage.textContent = "기본 체크리스트를 모두 완료했습니다. 계약 직전에도 다시 한번 검토하세요.";
+      }
+    }
+
+    checklistItems.forEach((item) => {
+      item.addEventListener("change", updateChecklistStatus);
+    });
+
+    checkAllBtn.addEventListener("click", () => {
+      checklistItems.forEach((item) => {
+        item.checked = true;
+      });
+      updateChecklistStatus();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      checklistItems.forEach((item) => {
+        item.checked = false;
+      });
+      updateChecklistStatus();
+    });
+
+    updateChecklistStatus();
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+</body>
+</html>
