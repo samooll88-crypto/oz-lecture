@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/samoo/Desktop/oz%20lecture/auction-app/app/globals.css"],"sourcesContent":["body {\r\n  margin: 0;\r\n  font-family: Arial;\r\n}"],"names":[],"mappings":"AAAA"}}]
+}

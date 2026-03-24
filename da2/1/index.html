@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>경매 비용 계산기</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f6f8;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      margin-bottom: 20px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d8dbe2;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    input[readonly] {
+      background: #f3f4f6;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.95;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      color: #d32f2f;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>경매 비용 계산기</h1>
+    <p class="desc">
+      법원과 지원을 선택하고 사건번호를 입력하면 물건 기본정보를 자동으로 채우는 구조입니다.
+    </p>
+
+    <!-- 1. 사건 조회 -->
+    <div class="card">
+      <h2>1. 사건 조회</h2>
+      <div class="grid">
+        <div>
+          <label for="courtMain">지방법원</label>
+          <select id="courtMain">
+            <option value="">지방법원을 선택하세요</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="courtBranch">지원 / 본원</label>
+          <select id="courtBranch">
+            <option value="">먼저 지방법원을 선택하세요</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="caseNumber">사건번호</label>
+          <input type="text" id="caseNumber" placeholder="예: 2024타경138635" />
+        </div>
+
+        <div class="full">
+          <button id="searchBtn">기본정보 불러오기</button>
+          <div class="message" id="searchMessage"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 자동 입력 -->
+    <div class="card">
+      <h2>2. 자동 입력되는 기본정보</h2>
+      <div class="grid">
+        <div>
+          <label for="useType">물건용도</label>
+          <input type="text" id="useType" readonly />
+        </div>
+
+        <div>
+          <label for="address">주소</label>
+          <input type="text" id="address" readonly />
+        </div>
+
+        <div>
+          <label for="appraisalPrice">감정가</label>
+          <input type="text" id="appraisalPrice" readonly />
+        </div>
+
+        <div>
+          <label for="minimumPrice">최저가</label>
+          <input type="text" id="minimumPrice" readonly />
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 수동 입력 -->
+    <div class="card">
+      <h2>3. 직접 입력하는 비용</h2>
+      <div class="grid">
+        <div>
+          <label for="bidPrice">예상 낙찰가</label>
+          <input type="number" id="bidPrice" placeholder="예: 1468000000" />
+        </div>
+
+        <div>
+          <label for="depositRate">보증금 비율 (%)</label>
+          <input type="number" id="depositRate" value="10" />
+        </div>
+
+        <div>
+          <label for="taxRate">취득세율 (%)</label>
+          <input type="number" id="taxRate" value="4.6" />
+        </div>
+
+        <div>
+          <label for="lawyerCost">법무사 비용</label>
+          <input type="number" id="lawyerCost" value="1500000" />
+        </div>
+
+        <div>
+          <label for="evictionCost">명도 비용</label>
+          <input type="number" id="evictionCost" value="3000000" />
+        </div>
+
+        <div>
+          <label for="repairCost">수리비</label>
+          <input type="number" id="repairCost" value="5000000" />
+        </div>
+
+        <div>
+          <label for="loanRate">대출 비율 (%)</label>
+          <input type="number" id="loanRate" value="70" />
+        </div>
+
+        <div>
+          <label for="interestRate">대출 금리 (%)</label>
+          <input type="number" id="interestRate" value="4.5" />
+        </div>
+
+        <div class="full">
+          <button id="calcBtn">최종 비용 계산하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 결과 -->
+    <div class="card">
+      <h2>4. 계산 결과</h2>
+      <div id="result">아직 계산하지 않았습니다.</div>
+    </div>
+  </div>
+
+  <script>
+    const courtData = {
+      "서울중앙지방법원": ["본원"],
+      "서울동부지방법원": ["본원"],
+      "서울서부지방법원": ["본원"],
+      "서울남부지방법원": ["본원"],
+      "서울북부지방법원": ["본원"],
+
+      "의정부지방법원": ["본원", "고양지원", "남양주지원"],
+      "인천지방법원": ["본원", "부천지원"],
+      "수원지방법원": ["본원", "성남지원", "안산지원", "안양지원", "여주지원", "평택지원"],
+      "춘천지방법원": ["본원", "강릉지원", "원주지원", "속초지원", "영월지원"],
+      "대전지방법원": ["본원", "홍성지원", "공주지원", "논산지원", "서산지원", "천안지원"],
+      "청주지방법원": ["본원", "충주지원", "제천지원", "영동지원"],
+      "대구지방법원": ["본원", "안동지원", "경주지원", "김천지원", "상주지원", "의성지원", "영덕지원", "포항지원"],
+      "부산지방법원": ["본원", "동부지원", "서부지원"],
+      "울산지방법원": ["본원"],
+      "창원지방법원": ["본원", "진주지원", "통영지원", "밀양지원", "거창지원", "마산지원"],
+      "광주지방법원": ["본원", "목포지원", "장흥지원", "순천지원", "해남지원"],
+      "전주지방법원": ["본원", "군산지원", "남원지원", "정읍지원"],
+      "제주지방법원": ["본원"]
+    };
+
+    function renderMainCourts() {
+      const courtMain = document.getElementById("courtMain");
+      const mainCourts = Object.keys(courtData);
+
+      mainCourts.forEach(court => {
+        const option = document.createElement("option");
+        option.value = court;
+        option.textContent = court;
+        courtMain.appendChild(option);
+      });
+    }
+
+    function renderBranches() {
+      const courtMain = document.getElementById("courtMain").value;
+      const courtBranch = document.getElementById("courtBranch");
+
+      courtBranch.innerHTML = "";
+
+      if (!courtMain) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "먼저 지방법원을 선택하세요";
+        courtBranch.appendChild(option);
+        return;
+      }
+
+      const branches = courtData[courtMain];
+
+      branches.forEach(branch => {
+        const option = document.createElement("option");
+        option.value = branch === "본원" ? courtMain : `${courtMain} ${branch}`;
+        option.textContent = branch === "본원" ? `${courtMain} 본원` : branch;
+        courtBranch.appendChild(option);
+      });
+    }
+
+    function formatNumber(value) {
+      if (value === "" || value === null || value === undefined || isNaN(value)) return "";
+      return Number(value).toLocaleString() + " 원";
+    }
+
+    function parseCaseNumber(caseNumber) {
+      const regex = /^(\d{4})타경(\d+)$/;
+      const match = caseNumber.match(regex);
+
+      if (!match) {
+        return null;
+      }
+
+      return {
+        year: match[1],
+        number: match[2]
+      };
+    }
+
+    const sampleApiResponse = {
+      result: {
+        resProductList: [
+          {
+            resUseType: "아파트",
+            resValuationAmt: "1600000000",
+            resAmount: "1280000000",
+            resDetailList: [
+              {
+                resAddress: "경기도 용인시 수지구 예시로 123"
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    async function fetchAuctionInfo(selectedCourt, caseNumber) {
+      const parsed = parseCaseNumber(caseNumber);
+
+      if (!parsed) {
+        throw new Error("사건번호 형식이 올바르지 않습니다. 예: 2024타경138635");
+      }
+
+      // 나중에 실제 API 연결 시 여기서 selectedCourt 사용
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(sampleApiResponse);
+        }, 500);
+      });
+    }
+
+    function clearAutoFields() {
+      document.getElementById("useType").value = "";
+      document.getElementById("address").value = "";
+      document.getElementById("appraisalPrice").value = "";
+      document.getElementById("minimumPrice").value = "";
+    }
+
+    async function loadAuctionInfo() {
+      const selectedCourt = document.getElementById("courtBranch").value;
+      const caseNumber = document.getElementById("caseNumber").value.trim();
+      const searchMessage = document.getElementById("searchMessage");
+
+      clearAutoFields();
+
+      if (!selectedCourt) {
+        searchMessage.textContent = "법원 또는 지원을 선택해주세요.";
+        return;
+      }
+
+      if (!caseNumber) {
+        searchMessage.textContent = "사건번호를 입력해주세요.";
+        return;
+      }
+
+      searchMessage.textContent = "조회 중입니다...";
+
+      try {
+        const data = await fetchAuctionInfo(selectedCourt, caseNumber);
+        const product = data?.result?.resProductList?.[0];
+
+        if (!product) {
+          searchMessage.textContent = "조회된 물건 정보가 없습니다.";
+          return;
+        }
+
+        const useType = product?.resUseType || "";
+        const address = product?.resDetailList?.[0]?.resAddress || "";
+        const appraisalAmt = Number(product?.resValuationAmt || 0);
+        const minimumAmt = Number(product?.resAmount || 0);
+
+        document.getElementById("useType").value = useType;
+        document.getElementById("address").value = address;
+        document.getElementById("appraisalPrice").value = appraisalAmt ? appraisalAmt.toLocaleString() + " 원" : "";
+        document.getElementById("minimumPrice").value = minimumAmt ? minimumAmt.toLocaleString() + " 원" : "";
+
+        searchMessage.textContent = "기본정보를 불러왔습니다.";
+      } catch (error) {
+        searchMessage.textContent = error.message;
+      }
+    }
+
+    function calculateCosts() {
+      const bidPrice = Number(document.getElementById("bidPrice").value);
+      const depositRate = Number(document.getElementById("depositRate").value) / 100;
+      const taxRate = Number(document.getElementById("taxRate").value) / 100;
+      const lawyerCost = Number(document.getElementById("lawyerCost").value);
+      const evictionCost = Number(document.getElementById("evictionCost").value);
+      const repairCost = Number(document.getElementById("repairCost").value);
+      const loanRate = Number(document.getElementById("loanRate").value) / 100;
+      const interestRate = Number(document.getElementById("interestRate").value) / 100;
+
+      const result = document.getElementById("result");
+
+      if (!bidPrice || bidPrice <= 0) {
+        result.innerHTML = "예상 낙찰가를 입력해주세요.";
+        return;
+      }
+
+      const deposit = bidPrice * depositRate;
+      const balance = bidPrice - deposit;
+      const tax = bidPrice * taxRate;
+      const loan = bidPrice * loanRate;
+      const monthlyInterest = loan * interestRate / 12;
+      const extraCosts = tax + lawyerCost + evictionCost + repairCost;
+      const actualCashNeeded = bidPrice - loan + extraCosts;
+
+      result.innerHTML = `
+        <div class="result-row"><span>입찰보증금</span><strong>${formatNumber(deposit)}</strong></div>
+        <div class="result-row"><span>잔금</span><strong>${formatNumber(balance)}</strong></div>
+        <div class="result-row"><span>취득세</span><strong>${formatNumber(tax)}</strong></div>
+        <div class="result-row"><span>법무사 비용</span><strong>${formatNumber(lawyerCost)}</strong></div>
+        <div class="result-row"><span>명도 비용</span><strong>${formatNumber(evictionCost)}</strong></div>
+        <div class="result-row"><span>수리비</span><strong>${formatNumber(repairCost)}</strong></div>
+        <div class="result-row"><span>대출금</span><strong>${formatNumber(loan)}</strong></div>
+        <div class="result-row"><span>월 예상 이자</span><strong>${formatNumber(monthlyInterest)}</strong></div>
+        <div class="result-row"><span>총 부대비용</span><strong>${formatNumber(extraCosts)}</strong></div>
+        <div class="result-row"><span class="highlight">실제 필요한 돈</span><span class="highlight">${formatNumber(actualCashNeeded)}</span></div>
+      `;
+    }
+
+    document.getElementById("courtMain").addEventListener("change", renderBranches);
+    document.getElementById("searchBtn").addEventListener("click", loadAuctionInfo);
+    document.getElementById("calcBtn").addEventListener("click", calculateCosts);
+
+    renderMainCourts();
+    renderBranches();
+  </script>
+</body>
+</html>

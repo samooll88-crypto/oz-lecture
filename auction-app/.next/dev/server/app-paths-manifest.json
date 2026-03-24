@@ -1,0 +1,4 @@
+{
+  "/api/auction-info/route": "app/api/auction-info/route.js",
+  "/page": "app/page.js"
+}
